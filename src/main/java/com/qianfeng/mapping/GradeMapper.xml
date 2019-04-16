@@ -119,8 +119,53 @@
   <select id="findAll" resultType="grade">
     select
     <include refid="Base_Column_List" />
-    from t_grade
+    from t_grade where flag=1
   </select>
+
+
+  <select id="findAllGradeBypage" parameterType="map" resultType="com.qianfeng.vo.VGrade">
+    select v.*, c.name cname from
+    (select count(s.gid) count,g.* from t_student s
+    RIGHT JOIN t_grade g
+    ON s.gid=g.id
+    GROUP BY g.id)v
+    INNER JOIN t_course c
+    on v.cid=c.id
+    order by v.id DESC
+    limit #{index},#{limit}
+  </select>
+
+  <select id="findCount"  resultType="int">
+    select count(*) from t_grade
+  </select>
+
+  <select id="fingVGradeById" parameterType="int" resultType="com.qianfeng.vo.VGrade">
+    select v.*, c.name cname from
+    (select count(g.id) count,g.* from t_student s
+    INNER JOIN t_grade g
+    ON s.gid=g.id
+    GROUP BY g.id)v
+    INNER JOIN t_course c
+    on v.cid=c.id
+    WHERE v.id=#{id}
+  </select>
+
+  <select id="findByNameOrLocation" parameterType="map" resultType="grade">
+    select * from t_grade
+    <where>
+      <if test="name !=null and name != ''">
+        and name=#{name}
+      </if>
+      <if test="location !=null and location != ''">
+        and location=#{location}
+      </if>
+      <if test="flag !=null">
+        and flag=#{flag}
+      </if>
+    </where>
+  </select>
+
+
 
 
 
