@@ -155,24 +155,12 @@
   </delete>
 
 
-    <resultMap type="com.qianfeng.vo.VMenuInfo" id="menuMap">
-        <id property="id" column="pcode"/>
-        <result property="menuName" column="pname"/>
-        <result property="url" column="purl"/>
-        <collection property="menuList" javaType="java.util.ArrayList" ofType="com.qianfeng.vo.VMenuInfo">
-            <id property="id" column="ccode"/>
-            <result property="menuName" column="cname"/>
-            <result property="url" column="curl"/>
-        </collection>
-
-    </resultMap>
-
 <!--    重写MenuMap-->
     <resultMap type="com.qianfeng.vo.VMenu" id="menuMap">
         <id property="id" column="pcode"/>
         <result property="menuName" column="pname"/>
         <result property="url" column="purl"/>
-        <collection property="menuList" javaType="java.util.ArrayList" ofType="com.qianfeng.vo.VMenuInfo">
+        <collection property="menuList" javaType="java.util.ArrayList" ofType="com.qianfeng.vo.VMenu">
             <id property="id" column="ccode"/>
             <result property="menuName" column="cname"/>
             <result property="url" column="curl"/>
