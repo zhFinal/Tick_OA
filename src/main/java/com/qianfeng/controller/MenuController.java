@@ -9,7 +9,6 @@ import com.qianfeng.service.AuthorityService;
 import com.qianfeng.service.UserService;
 import com.qianfeng.utils.JsonUtils;
 import com.qianfeng.vo.VMenu;
-import com.sun.org.apache.regexp.internal.RE;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

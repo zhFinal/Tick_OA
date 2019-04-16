@@ -46,4 +46,14 @@ public class VMenu {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return "VMenu{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", aurl='" + aurl + '\'' +
+                ", menuList=" + menuList +
+                '}';
+    }
 }

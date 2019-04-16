@@ -19,7 +19,6 @@
      <!-- 使用注解，所以需要进行注解扫描
      	springmvc的配置，只扫描控制器的注解
      	springmvc 相当于子容器
-     	
      	如果扫描的是父包，不仅设置扫描控制器注解，还需要设置use-default-filters="false"
       -->
 

@@ -1,7 +1,6 @@
 package com.qianfeng.dao;
 
 import com.qianfeng.entity.Role;
-import com.qianfeng.vo.VUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
