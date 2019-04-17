@@ -38,5 +38,5 @@ public interface GradeMapper {
                                       @Param(value = "location") String location,
                                       @Param(value = "flag") Integer flag);
 
-
+    
 }
