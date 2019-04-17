@@ -14,7 +14,7 @@ import com.qianfeng.vo.VProcess;
  */
 public interface CheckService {
 
-    public boolean insert(Check check,String name);
+    public boolean insert(Check check);
 
     public boolean update(String tid,int id,int flag);
 
