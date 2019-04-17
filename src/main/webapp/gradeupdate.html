@@ -34,19 +34,33 @@ function getData() {
 }
 //显示数据
 function showData(obj) {
-	$("#f1").val(obj.id);
-	$("#f2").val(obj.name);
-	$("#f3").val(obj.cname);
-	$("#f4").val(obj.createdate);
-	$("#f5").val(obj.week);
-	$("#f6").val(obj.location);
+
+	// 获取待更新的数据
+	$.ajax({
+		type:"get",
+		url:"gradequery.do?id=" + obj,
+		dataType:"json",
+		success:function(data){
+			obj = data.info;
+			if(data.code == 1){
+				//表单初始赋值
+				$("#f1").val(obj.id);
+				$("#f2").val(obj.name);
+				$("#f3").val(obj.cname);
+				$("#f4").val(obj.createdate);
+				$("#f5").val(obj.week);
+				$("#f6").val(obj.location);
+			}
+		}
+	})
 }
+
 </script>
 </head>
 <body>
 
 	<div class="layui-container" style="margin-top: 5px">
-		<form class="layui-form" action="gradeupdate.do" method="post">
+		<form id="updategrade" class="layui-form" action="gradeupdate.do" method="post">
 		<div class="layui-form-item">
 				<label class="layui-form-label">班级序号</label>
 				<div class="layui-input-block">
@@ -91,7 +105,8 @@ function showData(obj) {
 			
 		
 			<div class="layui-form-item">
-				<input class="layui-btn"  style="margin-left: 10%"  type="submit" value="确认修改">
+				<button class="layui-btn" lay-submit=""  lay-filter="update" style="margin-left: 10%">确认修改</button>
+				<button class="layui-btn"  onclick="back()" style="margin-left: 10%">返回</button>
 			</div>
 		</form>
 	</div>
@@ -102,7 +117,43 @@ function showData(obj) {
 						function() {
 							var form = layui.form, layer = layui.layer, laydate = layui.laydate;
 
-		});
+							//监听提交:这里注意form.on函数定义的位置，要与验证规则平级，在layui.use的参数：function函数体内
+							// 监听表单的提交事件，取值和提交按钮lay-filter相关
+							// data 表示表单中输入的数据
+							form.on('submit(update)', function(data){
+								// 发送ajax请求
+								$.ajax({
+									type:"get",
+									url:"gradeupdate.do",
+									data:data.field,
+									dataType:"json",
+									success:function(data1){
+										if(data1.code == 1) {
+											var t = parent.layui.table;// 上面写法也可以用
+											t.reload('tbdata');// 重新加载页面
+											var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+											parent.layer.close(index); //再执行关闭
+										} else {
+											alert(data1.info);
+										}
+									}
+
+								})
+								// 阻止默认的提交
+								return false;
+							})
+						});
+
+
+
+		function back(){
+
+			// 关闭弹窗
+			var t = parent.layui.table;// 上面写法也可以用
+			t.reload('tbdata');// 重新加载页面
+			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+			parent.layer.close(index); //再执行关闭
+		}
 	</script>
 </body>
 </html>

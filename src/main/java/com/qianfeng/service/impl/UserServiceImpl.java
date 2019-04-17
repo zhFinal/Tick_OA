@@ -105,6 +105,10 @@ public class UserServiceImpl  implements UserService{
         return PageUtil.createPage(count,list);
     }*/
 
+    @Override
+    public List<User> findLeader() {
+        return userDao.findLeader();
+    }
 
 
 }

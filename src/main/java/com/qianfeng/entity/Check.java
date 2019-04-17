@@ -1,5 +1,7 @@
 package com.qianfeng.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -7,11 +9,14 @@ import java.util.Date;
  * @date 2019/4/15/015
  */
 public class Check {
+    private String id;
     private String info;
     private String type;
-    private String statename;
+    private String startname;
     private String startno;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date enddate;
     private Integer days;
     private Integer pid;
@@ -19,6 +24,14 @@ public class Check {
 
     public Integer getFlag() {
         return flag;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public void setFlag(Integer flag) {
@@ -65,12 +78,12 @@ public class Check {
         this.startno = startno;
     }
 
-    public String getStatename() {
-        return statename;
+    public String getStartname() {
+        return startname;
     }
 
-    public void setStatename(String statename) {
-        this.statename = statename;
+    public void setStartname(String startname) {
+        this.startname = startname;
     }
 
     public String getType() {

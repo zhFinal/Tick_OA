@@ -1,5 +1,7 @@
 package com.qianfeng.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -10,7 +12,9 @@ public class Process {
     private Integer id;
     private String startname;
     private String type;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date startdate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date enddate;
     private Integer days;
     private Integer pid;

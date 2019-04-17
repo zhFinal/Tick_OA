@@ -43,6 +43,7 @@ public interface UserDao {
 
     Integer queryCount();
 
+    Integer queryCountByCondition(String no,int flag);
 
     void deleteById(int id);
 
@@ -53,7 +54,9 @@ public interface UserDao {
      */
     List<VMenu> queryMenu(int id);
 
+    List<VUser> findByCondition(@Param("no") String no,@Param("flag")int flag);
 
+    List<User> findLeader();
 
     int updateFlag(@Param("flag")Integer flag, @Param("id")int id);
 

@@ -4,6 +4,7 @@ import com.qianfeng.common.JsonBean;
 import com.qianfeng.common.LayUIListJsonBean;
 import com.qianfeng.common.PageInfo;
 import com.qianfeng.entity.Role;
+import com.qianfeng.entity.User;
 import com.qianfeng.service.RoleService;
 import com.qianfeng.service.UserService;
 import com.qianfeng.utils.JsonUtils;
@@ -13,6 +14,7 @@ import com.qianfeng.vo.VUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -59,5 +61,9 @@ public class UserController {
         }
     }
 
-
+    @RequestMapping("/leader.do")
+    @ResponseBody
+    public List<User> findLeader() {
+        return userService.findLeader();
+    }
 }

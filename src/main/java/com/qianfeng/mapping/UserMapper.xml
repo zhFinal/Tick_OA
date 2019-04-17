@@ -105,11 +105,13 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="findPwdByName" parameterType="string" resultType="string">
+    <!-- 权限管理 -->
+
+    <select id="findPwdByName" parameterType="string" resultType="string">
 		select password from t_user where no=#{no}
 	</select>
 
-  <select id="findRoleByName" parameterType="string" resultType="string">
+    <select id="findRoleByName" parameterType="string" resultType="string">
 		select r.rname from t_user u
 		inner join user_role ur
 		on u.uid=ur.uid
@@ -118,7 +120,7 @@
 		where u.no=#{uname}
 	</select>
 
-  <select id="findPermisionByName" parameterType="string" resultType="string">
+    <select id="findPermisionByName" parameterType="string" resultType="string">
 		select distinct p.pdesc from t_user u
 		inner join user_role ur
 		on u.uid=ur.uid
@@ -161,19 +163,29 @@
   </delete>
 
 
+<!--    重写MenuMap-->
+    <resultMap type="com.qianfeng.vo.VMenu" id="menuMap">
+        <id property="id" column="parid"/>
+        <result property="title" column="partitle"/>
+        <result property="url" column="parurl"/>
+        <collection property="childs" javaType="java.util.ArrayList" ofType="com.qianfeng.vo.VMenu">
+            <id property="id" column="sid"/>
+            <result property="title" column="sontitle"/>
+            <result property="url" column="sonurl"/>
+        </collection>
+
+    </resultMap>
 
 
-  <select id="queryMenu" parameterType="int" resultType="com.qianfeng.vo.VMenu">
-    select a.id,a.title,a.aurl,
-    b.id,b.title,b.aurl
-    from t_authority b
-    inner join t_authority a
-    on b.parentId = a.id
-    inner join t_roleauthority ra
-    on ra.aid = b.id
-    inner join  t_user u
-    on u.id = ra.rid
-    where u.id = #{id}
+    <select id="queryMenu" parameterType="int" resultMap="menuMap">
+        SELECT a.id parid, a.title partitle,a.aurl parurl , s.id sid, s.title sontitle, s.aurl sonurl
+        from t_user u
+        RIGHT JOIN t_userrole ur ON u.id = ur.uid
+        RIGHT JOIN t_role r on ur.rid = r.id
+        RIGHT JOIN t_roleauthority ra on r.id = ra.rid
+        RIGHT JOIN t_authority a on a.id = ra.aid
+        inner JOIN t_authority s on s.parentId = a.id
+        WHERE u.id = #{id}
   </select>
 
 
@@ -217,4 +229,9 @@
       from t_staff r
       where r.id=#{id}
   </insert>
+
+  <select id="findLeader" parameterType="java.lang.Integer" resultType="com.qianfeng.entity.User">
+        select u.* from t_user u INNER join t_userrole ur on u.id = ur.uid
+        where ur.rid &lt;= 3
+    </select>
 </mapper>

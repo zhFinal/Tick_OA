@@ -9,7 +9,6 @@ import com.qianfeng.service.AuthorityService;
 import com.qianfeng.service.UserService;
 import com.qianfeng.utils.JsonUtils;
 import com.qianfeng.vo.VMenu;
-import com.sun.org.apache.regexp.internal.RE;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,9 +30,9 @@ public class MenuController {
     private UserService userService;
 
     @RequestMapping("/usermenu.do")
-    public JsonBean findMenu(HttpSession session){
+    public List<VMenu> findMenu(HttpSession session){
         User user = (User) session.getAttribute(CommonInfo.LOGIN_USER);
-        List<VMenu> list = userService.queryMenuById(user.getId());
-        return JsonUtils.createJsonBean(1,list);
+        List<VMenu> parent = userService.queryMenuById(user.getId());
+        return parent;
     }
 }

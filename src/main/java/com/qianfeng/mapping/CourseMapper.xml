@@ -103,4 +103,29 @@
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~自主添加~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+  <select id="findAll" resultType="course">
+    select
+    <include refid="Base_Column_List" />
+    from t_course where flag=1
+  </select>
+
+  <select id="findAllCourseBypage" parameterType="map" resultType="course">
+    select * from t_course
+    order by id DESC
+    limit #{index},#{limit}
+  </select>
+
+  <select id="findCount"  resultType="int">
+    select count(*) from t_course
+  </select>
+
+  <select id="findByName"  resultType="course">
+    select * from t_course where name=#{name}
+  </select>
+
+
+
+
 </mapper>

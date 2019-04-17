@@ -12,6 +12,7 @@
 </head>
 <body>
 	<div class="layui-container">
+		<button class="layui-btn" onclick="addInfo()">添加新班级信息</button><br />
 		<table id="tbdata" lay-filter="tbop"></table>
 		<script type="text/html" id="barop">
     		<a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
@@ -47,6 +48,7 @@
 		                    url: "coursedelete.do",
 		                    type: "POST",
 		                    data:"id="+data.id,
+							dataType:"json",
 		                    success: function(data){
 		                        if(data.code==1000){
 		                            obj.del();//删除表格中的对应行数据
@@ -61,11 +63,28 @@
 		        } else if(obj.event === 'edit'){//编辑 修改
 		        	//get传递参数有中文，必须编码
 		        	//JSON.stringify 将对象转换为字符串
-		           location.href="courseupdate.html?d="+ encodeURI(JSON.stringify(data));
+		           // location.href="courseupdate.html?d="+ encodeURI(JSON.stringify(data));
+					layer.open({
+						type: 2,
+						area: ['480px', '720px'],
+						content: 'courseupdate.html?id=' + data.id //这里content是一个普通的String
+					});
 		        }
 		});
 	});
 
 </script>
+
+	<script type="text/javascript">
+		function addInfo(){
+			// 弹窗
+			layer.open({
+				type:2,
+				area:['480px', '720px'],
+				content:'courseadd.html' //这里content是一个普通的String
+			})
+		}
+
+	</script>
 </body>
 </html>

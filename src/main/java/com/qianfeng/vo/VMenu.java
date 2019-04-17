@@ -10,27 +10,18 @@ import java.util.List;
  */
 public class VMenu {
 
+
     private Integer id;
     private String title;
-    private String aurl;
-    private List<VMenu> menuList;
+    private String url;
+    // 子菜单
+    private List<VMenu> childs;
 
-
-
-    public String getAurl() {
-        return aurl;
+    public Integer getId() {
+        return id;
     }
-
-    public void setAurl(String aurl) {
-        this.aurl = aurl;
-    }
-
-    public List<VMenu> getMenuList() {
-        return menuList;
-    }
-
-    public void setMenuList(List<VMenu> menuList) {
-        this.menuList = menuList;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -41,11 +32,28 @@ public class VMenu {
         this.title = title;
     }
 
-    public Integer getId() {
-        return id;
+    public String getUrl() {
+        return url;
+    }
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public List<VMenu> getChilds() {
+        return childs;
+    }
+
+    public void setChilds(List<VMenu> childs) {
+        this.childs = childs;
+    }
+
+    @Override
+    public String toString() {
+        return "VMenu{" +
+                "id=" + id +
+                ", menuName='" + title + '\'' +
+                ", url='" + url + '\'' +
+                ", menuList=" + childs +
+                '}';
     }
 }
