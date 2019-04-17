@@ -32,5 +32,7 @@ public interface StudentMapper {
     // 查询表中最后一名学生信息
     public Student findLastStu();
 
+    // 批量添加学员信息
+    public void addBatch(List<Student> list);
 
 }

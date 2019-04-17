@@ -30,10 +30,10 @@ public class MenuController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/usermenu.do")
-    public JsonBean findMenu(HttpSession session){
-        User user = (User) session.getAttribute(CommonInfo.LOGIN_USER);
-        List<VMenu> list = userService.queryMenuById(user.getId());
-        return JsonUtils.createJsonBean(1,list);
-    }
+//    @RequestMapping("/usermenu.do")
+//    public JsonBean findMenu(HttpSession session){
+//        User user = (User) session.getAttribute(CommonInfo.LOGIN_USER);
+//        List<VMenu> list = userService.queryMenuById(user.getId());
+//        return JsonUtils.createJsonBean(1,list);
+//    }
 }

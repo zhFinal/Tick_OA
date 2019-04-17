@@ -29,5 +29,7 @@ public interface StudentService {
     // 选择性更新学生信息
     public int updateStu(Student student);
 
+    // 批量添加学员信息
+    public void addBatch(List<Student> list);
 
 }

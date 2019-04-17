@@ -114,7 +114,7 @@
 			</div>
 
 			<div class="layui-form-item">
-				<button class="layui-btn" lay-submit="" id="btn1" lay-filter="add" style="margin-left: 10%">确认新增</button>
+				<button class="layui-btn" lay-submit="" id="btn1" lay-filter="update" style="margin-left: 10%">确认修改</button>
 				<button class="layui-btn" id="btn2" onclick="back()" style="margin-left: 10%">返回</button>
 			</div>
 		</form>
@@ -171,7 +171,7 @@
 							//监听提交:这里注意form.on函数定义的位置，要与验证规则平级，在layui.use的参数：function函数体内
 							// 监听表单的提交事件，取值和提交按钮lay-filter相关
 							// data 表示表单中输入的数据
-							form.on('submit(add)', function(data){
+							form.on('submit(update)', function(data){
 								// 发送ajax请求
 								$.ajax({
 									type:"get",
@@ -244,6 +244,8 @@
 
 		// 关闭弹窗
 		function back(){
+			var t = parent.layui.table;// 上面写法也可以用
+			t.reload('tbdata');// 重新加载页面
 			var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
 			parent.layer.close(index); //再执行关闭
 		}
