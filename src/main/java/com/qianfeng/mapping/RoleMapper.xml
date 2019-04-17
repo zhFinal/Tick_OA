@@ -80,7 +80,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="queryAll" resultType="com.qianfeng.entity.Role">
+  <select id="queryAll" parameterType="map" resultType="com.qianfeng.entity.Role">
       select * from t_role
       limit #{index},#{limit}
   </select>

@@ -13,7 +13,7 @@ import java.util.List;
 public interface RoleService {
 
 
-    public List<Role> findAllRole();
+    public PageInfo findAllRole(int page,int limit);
 
     public void deleteById(int id);
 

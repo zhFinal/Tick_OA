@@ -27,7 +27,7 @@ public class UserServiceImpl implements UserService{
         subject.login(token);
         // 登出
         //subject.logout();
-        User user = userDao.selectByName(name);
+        User user = userDao.selectByNo(name);
         return user;
     }
 
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User selectByName(String name) {
-        return userDao.selectByName(name);
+        return userDao.selectByNo(name);
     }
 
 
@@ -99,11 +99,6 @@ public class UserServiceImpl implements UserService{
         List<VUser> list = userDao.findByCondition(no,flag);
         return PageUtil.createPage(count,list);
     }*/
-
-    @Override
-    public List<User> findLeader() {
-        return userDao.findLeader();
-    }
 
     @Override
     public List<User> findLeader() {

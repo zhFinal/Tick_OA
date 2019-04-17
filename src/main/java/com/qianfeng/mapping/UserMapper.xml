@@ -151,9 +151,9 @@
     limit #{index},#{limit}
   </select>
 
-  <select id="selectByName" parameterType="string" resultType="com.qianfeng.entity.User">
+  <select id="selectByNo" parameterType="string" resultType="com.qianfeng.entity.User">
 
-    select * from t_user where name=#{name}
+    select * from t_user where no=#{no}
   </select>
 
 

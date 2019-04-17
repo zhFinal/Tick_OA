@@ -39,7 +39,7 @@ public interface UserDao {
 
     List<VUser> findAllUser(@Param("index") int index, @Param("limit")int limit,@Param("no")String no);
 
-    public User selectByName(String name);
+    public User selectByNo(String no);
 
     Integer queryCount();
 

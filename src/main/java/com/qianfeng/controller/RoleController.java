@@ -25,8 +25,9 @@ public class RoleController {
     private RoleService roleService;
 
     @RequestMapping("/roleall.do")
-    public List<Role> findAll(){
-        return roleService.findAllRole();
+    public LayUIListJsonBean findAll(Integer page , Integer limit){
+        PageInfo info = roleService.findAllRole(page, limit);
+        return JsonUtils.createListBean(0,info);
     }
 
     @RequestMapping("/delrole.do")

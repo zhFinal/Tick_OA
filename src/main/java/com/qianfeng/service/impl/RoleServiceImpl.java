@@ -23,9 +23,11 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-   public List<Role> findAllRole(){
-        List<Role> list = roleMapper.findAllRole();
-        return list;
+   public PageInfo findAllRole(int page, int limit){
+        int index = PageUtil.getIndex(page, limit);
+        List<Role> list = roleMapper.queryAll(index,limit);
+        PageInfo info = PageUtil.createPage(roleMapper.queryCount(), list);
+        return info;
     }
     @Override
     public void deleteById(int id) {
