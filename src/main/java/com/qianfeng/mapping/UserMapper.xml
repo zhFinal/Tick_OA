@@ -143,7 +143,7 @@
 
     <select id="selectByName" parameterType="string" resultType="com.qianfeng.entity.User">
 
-    select * from t_user where name=#{name}
+    select * from t_user where no=#{name}
   </select>
 
     <select id="queryCount" resultType="java.lang.Integer">
@@ -157,27 +157,27 @@
 
 <!--    重写MenuMap-->
     <resultMap type="com.qianfeng.vo.VMenu" id="menuMap">
-        <id property="id" column="pcode"/>
-        <result property="menuName" column="pname"/>
-        <result property="url" column="purl"/>
-        <collection property="menuList" javaType="java.util.ArrayList" ofType="com.qianfeng.vo.VMenu">
-            <id property="id" column="ccode"/>
-            <result property="menuName" column="cname"/>
-            <result property="url" column="curl"/>
+        <id property="id" column="parid"/>
+        <result property="title" column="partitle"/>
+        <result property="url" column="parurl"/>
+        <collection property="childs" javaType="java.util.ArrayList" ofType="com.qianfeng.vo.VMenu">
+            <id property="id" column="sid"/>
+            <result property="title" column="sontitle"/>
+            <result property="url" column="sonurl"/>
         </collection>
 
     </resultMap>
 
 
     <select id="queryMenu" parameterType="int" resultMap="menuMap">
-        SELECT u.id, u.name, r.name pername, a.title,s.title sonTitle, s.aurl
+        SELECT a.id parid, a.title partitle,a.aurl parurl , s.id sid, s.title sontitle, s.aurl sonurl
         from t_user u
         RIGHT JOIN t_userrole ur ON u.id = ur.uid
         RIGHT JOIN t_role r on ur.rid = r.id
         RIGHT JOIN t_roleauthority ra on r.id = ra.rid
         RIGHT JOIN t_authority a on a.id = ra.aid
         inner JOIN t_authority s on s.parentId = a.id
-        WHERE u.id = 2
+        WHERE u.id = #{id}
   </select>
 
 
