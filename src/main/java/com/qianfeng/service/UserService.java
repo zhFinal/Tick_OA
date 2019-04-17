@@ -30,4 +30,5 @@ public interface UserService {
     PageInfo findByCondition(int page,int limit,String no,int flag);
 //    void loginRememberMe(String name, String password, boolean rememberMe);
 
+    List<User> findLeader();
 }

@@ -52,7 +52,6 @@
 				<div class="layui-input-block">
 					<select name="rname"  id="cds">
 						<option value="-1">--请选择领导--</option>
-						<option value="张三">张三</option>
 					</select>
 				</div>
 			</div>
@@ -98,7 +97,7 @@
 		});
 		//初始化数据
 		function initData() {
-			$.get("departall.do",null,function(arr){
+			$.get("leader.do",null,function(arr){
 				for(i=0;i<arr.length;i++){
 					$("#cds").append("<option value='"+arr[i].id+"'>"+arr[i].name+"</option>");
 				}
