@@ -55,7 +55,7 @@ public class CheckServiceImpl implements CheckService {
             for (int i = 0; i < items.size(); i++) {
                 EchartsItem item = items.get(i);
                 if (i == 0){
-                    vEcharts.setId(item.getPid());
+                    vEcharts.setId(item.getId());
                 }
                 vEcharts.getDatax().add(item.getAname());
                 vEcharts.getDatas1().add(item.getStime());

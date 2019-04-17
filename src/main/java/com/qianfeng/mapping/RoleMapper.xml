@@ -100,6 +100,6 @@
   
   <select id="findAllRole" resultType="com.qianfeng.entity.Role">
     
-    select * from t_roleauthority;
+    select * from t_role;
   </select>
 </mapper>

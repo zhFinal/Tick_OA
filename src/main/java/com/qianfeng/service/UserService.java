@@ -16,18 +16,22 @@ public interface UserService {
 
     public void loginRememberMe(String no, String password, boolean rememberMe);
 
-    PageInfo findAllUser(int page, int limit);
+    PageInfo findAllUser(int page, int limit,String no);
 
     void deleteById(int id);
 
     User selectByName(String name);
 
-//    void login(String name, String password);
 
 
     List<VMenu> queryMenuById(int id);
 
-    PageInfo findByCondition(int page,int limit,String no,int flag);
-//    void loginRememberMe(String name, String password, boolean rememberMe);
 
+//    List<VUser> findByCondition(String no,int flag);
+
+    boolean updateFlag(int flag,int id);
+
+    boolean insert(User user);
+
+    boolean insertBatch(List<User> list);
 }

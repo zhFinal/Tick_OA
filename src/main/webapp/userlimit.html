@@ -27,9 +27,11 @@
             <div class="layui-form-item layui-form-text">
                 <label class="layui-form-label">用户：</label>
                 <div class="layui-input-block">
-                    <select class="layui-input" id="fg">
+                    <select class="layui-input" id="flag">
+
                         <option value="1">有效</option>
                         <option value="2">无效</option>
+
                     </select>
                 </div>
             </div>
@@ -70,28 +72,28 @@
             , url: 'userall.do' //数据接口
             , page: true //开启分页
             , cols: [[ //表头
-                {field: 'id', title: '序号', sort: true, fixed: 'left'}
-                , {field: 'no', title: '工号'}
-                , {field: 'name', title: '姓名', sort: true}
-                , {field: 'info', title: '职位', sort: true}
-                , {
-                    field: 'flag', title: '有/无效', templet: function (obj) {
-                        var r;
-                        switch (obj.flag) {
-                            //有效
-                            case 1:
-                                r = "<span style='color: #1E9FFF'>有效</span>";
-                                break;
-                            case 2:
-                                r = "<span style='color: red'>无效</span>";
-                                break;
-                        }
-                        return r;
+            {field: 'id', title: '序号', sort: true, fixed: 'left'}
+            , {field: 'no', title: '工号'}
+            , {field: 'name', title: '姓名', sort: true}
+            , {field: 'info', title: '职位', sort: true}
+            , {
+                field: 'flag', title: '有/无效', templet: function (obj) {
+                    var r;
+                    switch (obj.flag) {
+                        //有效
+                        case 1:
+                            r = "<span style='color: #1E9FFF'>有效</span>";
+                            break;
+                        case 2:
+                            r = "<span style='color: red'>无效</span>";
+                            break;
                     }
+                    return r;
                 }
-                , {field: 'right', title: '操作', toolbar: "#barop"}
-            ]]
-        });
+            }
+            , {field: 'right', title: '操作', toolbar: "#barop"}
+        ]]
+    });
         //监听工具条
         table.on('tool(tbop)', function (obj) {
             var data = obj.data;
@@ -117,18 +119,20 @@
             }
         });
     });
+
     function searchData() {
         tableIns.reload({
-            where: {
-                url:"find.do",//设定异步数据接口的额外参数，任意设
+            where: { //设定异步数据接口的额外参数，任意设
                 no: $("#no").val()
-                , flag: $("#flag").val()
+                , flag: $("#fg").val()
             }
             , page: {
                 curr: 1 //重新从第 1 页开始
             }
         });
     }
+
+
     //修改
     function changeRole() {
         $.ajax({
@@ -165,7 +169,7 @@
                 btn: ['确认', '取消'],
                 yes: function(index, layero){
                     $.ajax({
-                        url: "userroleedit.do",
+                        url: "user.do",
                         data: $("#fm1").serialize(),
                         success: function (obj) {
                             if (obj.code == 1000) {

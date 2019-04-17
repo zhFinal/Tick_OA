@@ -13,9 +13,13 @@ import java.util.List;
 public interface RoleService {
 
 
-    public PageInfo findAllRole(int page, int limit);
+    public List<Role> findAllRole();
 
     public void deleteById(int id);
 
     List<Role> queryRole(int id);
+
+    boolean updateRole(int uid,int[] rids);
+
+    boolean updatePower(int rid,int[] aids);
 }

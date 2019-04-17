@@ -8,6 +8,8 @@ import com.qianfeng.vo.VUser;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.ResultType;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
+import org.omg.PortableInterceptor.INACTIVE;
 
 import java.util.List;
 
@@ -35,13 +37,12 @@ public interface UserDao {
 
     List<String> findPermisionByName(String name);
 
-    List<VUser> findAllUser(@Param("index") int index, @Param("limit")int limit);
+    List<VUser> findAllUser(@Param("index") int index, @Param("limit")int limit,@Param("no")String no);
 
     public User selectByName(String name);
 
     Integer queryCount();
 
-    Integer queryCountByCondition(String no,int flag);
 
     void deleteById(int id);
 
@@ -52,6 +53,9 @@ public interface UserDao {
      */
     List<VMenu> queryMenu(int id);
 
-    List<VUser> findByCondition(@Param("no") String no,@Param("flag")int flag);
 
+
+    int updateFlag(@Param("flag")Integer flag, @Param("id")int id);
+
+    void addUser(User user);
 }

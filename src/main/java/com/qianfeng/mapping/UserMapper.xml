@@ -129,14 +129,24 @@
 		where u.no=#{uname}
 	</select>
 
+  <select id="queryCount" resultType="java.lang.Integer">
+
+    select count(*) from t_user
+  </select>
+
   <select id="findAllUser" resultType="com.qianfeng.vo.VUser">
     select u.id,u.no,u.name,r.info,u.flag
     from t_user u
     inner join t_role r
     on u.id = r.id
+
+    <where>
+      <if test="no != null">
+        and u.no like '%${no}%'
+      </if>
+
+    </where>
     limit #{index},#{limit}
-
-
   </select>
 
   <select id="selectByName" parameterType="string" resultType="com.qianfeng.entity.User">
@@ -144,9 +154,7 @@
     select * from t_user where name=#{name}
   </select>
 
-  <select id="queryCount" resultType="java.lang.Integer">
-    select count(*) from t_user
-  </select>
+
 
   <delete id="deleteById" parameterType="int">
     delete from t_user where id=#{id}
@@ -170,7 +178,7 @@
 
 
 
-  <select id="findByCondition" resultType="com.qianfeng.vo.VUser">
+ <!-- <select id="findByCondition" resultType="com.qianfeng.vo.VUser">
 
     select u.id,u.no,u.name,r.info,u.flag
     from t_user u
@@ -182,30 +190,31 @@
         and no like '%${no}%'
       </if>
       <if test="flag = 1">
-        and role = 1
+        and flag = 1
       </if>
       <if test="flag = 2">
-        and role = 2
+        and flag = 2
 
+      </if>
+      <if test="flag = 0">
+
+        and flag = *
       </if>
     </where>
   </select>
+-->
 
-  <select id="queryCountByCondition" resultType="java.lang.Integer">
 
-    select count(*) from t_user
-    <where>
+  <update id="updateFlag" parameterType="int">
 
-      <if test="no != null">
-        and no like '%${no}%'
-      </if>
-      <if test="flag = 1">
-        and role = 1
-      </if>
-      <if test="flag = 2">
-        and role = 2
+    update t_user set flag=#{flag} where id=#{id}
+  </update>
 
-      </if>
-    </where>
-  </select>
+  <insert id="addUser" parameterType="com.qianfeng.entity.User">
+
+      insert into t_user u(u.id,u.no,u.password,u.name,u.flag,u.headphone)
+      select u.id,r.no.u.password,r.name,r.flag,r.phone
+      from t_staff r
+      where r.id=#{id}
+  </insert>
 </mapper>

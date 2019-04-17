@@ -1,6 +1,8 @@
 package com.qianfeng.vo;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author Zelven
@@ -13,6 +15,13 @@ public class VEcharts {
     private List<String> datas1;
     private List<String> datas2;
     private List<String> datas3;
+
+    public VEcharts() {
+        datax=new ArrayList<>();
+        datas1=new ArrayList<>();
+        datas2=new ArrayList<>();
+        datas3=new ArrayList<>();
+    }
 
     public List<String> getDatas3() {
         return datas3;

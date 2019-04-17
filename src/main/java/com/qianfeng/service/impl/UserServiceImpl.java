@@ -49,10 +49,10 @@ public class UserServiceImpl  implements UserService{
     }
 
     @Override
-    public PageInfo findAllUser(int page, int limit) {
+    public PageInfo findAllUser(int page, int limit,String no) {
         int index = PageUtil.getIndex(page,limit);
         int count = userDao.queryCount();
-        List<VUser> list = userDao.findAllUser(index,limit);
+        List<VUser> list = userDao.findAllUser(index,limit,no);
         return PageUtil.createPage(count,list);
 
     }
@@ -73,13 +73,38 @@ public class UserServiceImpl  implements UserService{
         return userDao.queryMenu(id);
     }
 
+
+
     @Override
+    public boolean updateFlag(int flag, int id) {
+        return userDao.updateFlag(flag,id)>0;
+    }
+
+    @Override
+    public boolean insert(User user) {
+        return userDao.insert(user) > 0;
+    }
+
+    @Override
+    public boolean insertBatch(List<User> list) {
+        try {
+            for (User user : list) {
+                userDao.insert(user);
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+    }
+
+    /*@Override
     public PageInfo findByCondition(int page, int limit, String no, int flag) {
         int index = PageUtil.getIndex(page,limit);
         int count = userDao.queryCountByCondition(no,flag);
         List<VUser> list = userDao.findByCondition(no,flag);
         return PageUtil.createPage(count,list);
-    }
+    }*/
+
 
 
 }

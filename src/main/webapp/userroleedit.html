@@ -14,33 +14,34 @@
 	<div class="layui-container" style="margin-top: 5px">
 		<form class="layui-form" action="courseadd.do" method="post">
 			<div class="layui-form-item">
-				<label class="layui-form-label">学科名称</label>
+				<label class="layui-form-label">编号</label>
 				<div class="layui-input-block">
-					<input type="text" name="name" lay-verify="name" autocomplete="off"
-						placeholder="请输入名称" class="layui-input">
+					<input type="text" name="no" lay-verify="name" autocomplete="off"
+						placeholder="请输入编号" class="layui-input">
 				</div>
 			</div>
 			
 			<div class="layui-form-item">
-				<label class="layui-form-label">成立日期</label>
+				<label class="layui-form-label">密码</label>
 				<div class="layui-input-block">
-				 <input type="text" name="createdate" id="date" autocomplete="off" class="layui-input">
+					<input type="text" name="password" lay-verify="name" autocomplete="off"
+						   placeholder="请输入密码" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">学科周期</label>
+				<label class="layui-form-label">姓名</label>
 				<div class="layui-input-block">
-					<input type="text" name="week" lay-verify="name" autocomplete="off"
-						placeholder="请输入周期" class="layui-input">
+					<input type="text" name="name" lay-verify="name" autocomplete="off"
+						placeholder="请输入姓名" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">学科类型</label>
+				<label class="layui-form-label">状态</label>
 				<div class="layui-input-block">
 					<select name="type">
-						<option value="1">普通</option>
-						<option value="2">精品</option>
-						<option value="3">业余</option>
+						<option value="1">有效</option>
+						<option value="2">无效</option>
+
 					</select>
 				</div>
 			</div>

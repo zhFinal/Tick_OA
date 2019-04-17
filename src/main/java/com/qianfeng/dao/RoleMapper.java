@@ -26,4 +26,8 @@ public interface RoleMapper {
     List<Role> queryRole(int id);
 
     List<Role> findAllRole();
+
+    int insertRole(@Param("uid")int uid,@Param("rid")int rid);
+
+
 }

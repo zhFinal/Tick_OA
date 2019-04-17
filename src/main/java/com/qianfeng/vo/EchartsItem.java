@@ -7,7 +7,7 @@ package com.qianfeng.vo;
 public class EchartsItem {
 
 
-    private String pid;
+    private String id;
     private String aname;
     private String stime;
     private String etime;
@@ -45,11 +45,12 @@ public class EchartsItem {
         this.aname = aname;
     }
 
-    public String getPid() {
-        return pid;
+
+    public String getId() {
+        return id;
     }
 
-    public void setPid(String pid) {
-        this.pid = pid;
+    public void setId(String id) {
+        this.id = id;
     }
 }

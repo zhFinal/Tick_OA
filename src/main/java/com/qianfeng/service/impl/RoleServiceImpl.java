@@ -23,11 +23,9 @@ public class RoleServiceImpl implements RoleService {
 
 
     @Override
-    public PageInfo findAllRole(int page, int limit) {
-       int index = PageUtil.getIndex(page,limit);
-       int count = roleMapper.queryCount();
-       List<Role> list = roleMapper.queryAll(index,limit);
-       return PageUtil.createPage(count,list);
+   public List<Role> findAllRole(){
+        List<Role> list = roleMapper.findAllRole();
+        return list;
     }
     @Override
     public void deleteById(int id) {
@@ -37,5 +35,34 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> queryRole(int id) {
         return roleMapper.queryRole(id);
+    }
+
+    @Override
+    public boolean updateRole(int uid, int[] rids) {
+        try {
+            roleMapper.deleteByPrimaryKey(uid);
+            for (int rid : rids) {
+                roleMapper.insertRole(uid,rid);
+            }
+            return true;
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean updatePower(int rid, int[] aids) {
+        try {
+            roleMapper.deleteByPrimaryKey(rid);
+            for (int i = 0; i < aids.length; i++) {
+                roleMapper.insertRole(rid,aids[i]);
+
+            }
+            return true;
+        }catch (Exception e){
+            return false;
+        }
+
     }
 }
