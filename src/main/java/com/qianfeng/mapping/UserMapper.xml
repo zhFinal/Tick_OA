@@ -137,8 +137,6 @@
     inner join t_role r
     on u.id = r.id
     limit #{index},#{limit}
-
-
   </select>
 
     <select id="selectByName" parameterType="string" resultType="com.qianfeng.entity.User">
@@ -219,4 +217,11 @@
             </if>
         </where>
     </select>
+
+    <select id="findLeader" parameterType="java.lang.Integer" resultType="com.qianfeng.entity.User">
+        select u.* from t_user u INNER join t_userrole ur on u.id = ur.uid
+        where ur.rid &lt;= 3
+    </select>
+
+
 </mapper>

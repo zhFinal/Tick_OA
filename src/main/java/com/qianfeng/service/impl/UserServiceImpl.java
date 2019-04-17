@@ -2,7 +2,6 @@ package com.qianfeng.service.impl;
 
 import com.qianfeng.common.PageInfo;
 import com.qianfeng.dao.UserDao;
-import com.qianfeng.entity.Role;
 import com.qianfeng.entity.User;
 import com.qianfeng.service.UserService;
 import com.qianfeng.utils.PageUtil;
@@ -16,12 +15,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-/**
- * @author Administrator
- * 1645
- */
 @Service
-public class UserServiceImpl  implements UserService{
+public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
     @Override
@@ -79,6 +74,11 @@ public class UserServiceImpl  implements UserService{
         int count = userDao.queryCountByCondition(no,flag);
         List<VUser> list = userDao.findByCondition(no,flag);
         return PageUtil.createPage(count,list);
+    }
+
+    @Override
+    public List<User> findLeader() {
+        return userDao.findLeader();
     }
 
 

@@ -54,4 +54,6 @@ public interface UserDao {
 
     List<VUser> findByCondition(@Param("no") String no,@Param("flag")int flag);
 
+    List<User> findLeader();
+
 }

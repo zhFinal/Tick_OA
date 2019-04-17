@@ -3,12 +3,14 @@ package com.qianfeng.controller;
 import com.qianfeng.common.JsonBean;
 import com.qianfeng.common.LayUIListJsonBean;
 import com.qianfeng.common.PageInfo;
+import com.qianfeng.entity.User;
 import com.qianfeng.service.UserService;
 import com.qianfeng.utils.JsonUtils;
 import com.qianfeng.utils.PageUtil;
 import com.qianfeng.vo.VUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -40,5 +42,11 @@ public class UserController {
 
         PageInfo pageInfo = userService.findByCondition(page,limit,no,flag);
         return JsonUtils.createListBean(0,pageInfo);
+    }
+
+    @RequestMapping("/leader.do")
+    @ResponseBody
+    public List<User> findLeader() {
+        return userService.findLeader();
     }
 }
