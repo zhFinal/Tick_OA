@@ -24,10 +24,8 @@ public class CheckServiceImpl implements CheckService {
 
 
     @Override
-    public boolean insert(Check check) {
-        checkMapper.insertSelective(check);
-
-        return true;
+    public boolean insert(Check check, String name) {
+        return false;
     }
 
     @Override

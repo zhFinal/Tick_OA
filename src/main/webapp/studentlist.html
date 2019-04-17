@@ -12,7 +12,8 @@
 </head>
 <body>
 	<div class="layui-container">
-		<button class="layui-btn" onclick="addInfo()">添加学生信息</button><br />
+		<button class="layui-btn" onclick="addInfo()">添加新学员信息</button>&nbsp;&nbsp;&nbsp;&nbsp;
+		<button class="layui-btn" onclick="addBatchInfo()">批量导入新学员信息</button><br />
 		<table id="tbdata" lay-filter="tbop"></table>
 		<script type="text/html" id="barop">
 			<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="upd">更新信息</a>
@@ -83,6 +84,18 @@
 				type:2,
 				area:['480px', '720px'],
 				content:'studentadd.html' //这里content是一个普通的String
+			})
+		}
+
+	</script>
+
+	<script type="text/javascript">
+		function addBatchInfo(){
+			// 弹窗
+			layer.open({
+				type:2,
+				area:['480px', '720px'],
+				content:'studentbatch.html' //这里content是一个普通的String
 			})
 		}
 

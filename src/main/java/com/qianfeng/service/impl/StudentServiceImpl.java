@@ -7,6 +7,7 @@ import com.qianfeng.vo.VStudent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -94,5 +95,37 @@ public class StudentServiceImpl implements StudentService {
             throw new RuntimeException("该学生身份证号码已存在，请重新输入");
         }
         return studentDao.updateByPrimaryKeySelective(student);
+    }
+
+    @Override
+    public void addBatch(List<Student> list) {
+
+        // 这里需要对控制层传来的list数据做拆分，
+        // 一：提高添加效率； 二：sql语句也不可以无限长添加数据；
+        // 这里拆分为每【100】条数据添加一次
+        int count = 1;
+
+        List<Student> tempList = new ArrayList<>();
+
+        for (int i = 0; i < list.size(); i++) {
+
+            tempList.add(list.get(i));
+
+            if (count % 100 != 0) {
+                count++;
+            } else {
+                // 完成添加
+                studentDao.addBatch(tempList);
+                tempList.clear();
+                count = 1;
+            }
+
+        }
+
+        // 将剩余不为整百条的数据实现添加
+        if (tempList.size() != 0) {
+            studentDao.addBatch(tempList);
+        }
+
     }
 }

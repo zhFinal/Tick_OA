@@ -13,7 +13,7 @@ public class Course {
 
     private Integer week;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     private Date createdate;
 
     private Integer type;
