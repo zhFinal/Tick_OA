@@ -73,6 +73,7 @@ function showData(obj) {
 				<div class="layui-input-block">
 					<input type="text" name="name" id="f2" lay-verify="name" autocomplete="off"
 						placeholder="请输入名称" class="layui-input">
+					<input type="hidden" name="flag" value="1" class="layui-input">
 				</div>
 			</div>
 			<div class="layui-form-item">
@@ -137,13 +138,11 @@ function showData(obj) {
 											alert(data1.info);
 										}
 									}
-
 								})
 								// 阻止默认的提交
 								return false;
 							})
 						});
-
 
 
 		function back(){

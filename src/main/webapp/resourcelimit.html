@@ -62,14 +62,16 @@
 		        if(obj.event === 'del'){
 		            layer.confirm('是否确认删除权限?', function(index){
 		                $.ajax({
-		                    url: "coursedelete.do",
+		                    url: "authoritydelete.do",
 		                    type: "POST",
 		                    data:"id="+data.id,
 		                    success: function(data){
-		                        if(data.code==1000){
-		                            obj.del();//删除表格中的对应行数据
-		                            layer.close(index);
-		                            layer.msg("删除成功", {icon: 6});
+		                        if(data.code==1000) {
+                                    obj.del();//删除表格中的对应行数据
+                                    layer.close(index);
+                                    layer.msg("删除成功", {icon: 6});
+                                }else if(data.code==2000){
+		                            alert("无权限删除");
 		                        }else{
 		                            layer.msg("删除失败", {icon: 5});
 		                        }
@@ -79,13 +81,17 @@
 		        } else if(obj.event === 'edit'){//编辑 修改
 		        	//get传递参数有中文，必须编码
 		        	//JSON.stringify 将对象转换为字符串
-		           location.href="courseupdate.html?d="+ encodeURI(JSON.stringify(data));
+                    layer.open({
+                        type: 2,
+                        area: ['480px', '480px'],
+                        content: 'resourceupdate.html?id=' + data.id //这里content是一个普通的String
+                    });
 		        }
 		});
 	});
 	function addAuth() {
         layer.open({
-            area: ['500px', '380px'],
+            area: ['480px', '480px'],
             title: '权限页面新增',
             type: 1,
             content:  $('#dvlay'), //这里content是一个普通的String
@@ -123,9 +129,9 @@
 		    $("#pid").val(i);
 		}
     }
-    function setPid(obj) {
-        $("#pid").val(obj.value());
-    }
+    // function setPid(obj) {
+    //     $("#pid").val(obj.value());
+    // }
 </script>
 </body>
 <div style="display: none;margin-top: 10px;width: 480px" id="dvlay">
@@ -155,11 +161,11 @@
 				<input type="radio" name="pid" value="-1" lay-filter="level"   title="二级" >
 			</div>
 		</div>
-		<input type="hidden" name="parentId" id="pid">
+		<!--<input type="hidden" name="parentId" id="pid">-->
 		<div class="layui-form-item" id="dvl1" style="display: none" >
 			<label class="layui-form-label">上级路径：</label>
 			<div class="layui-input-inline">
-				<select onselect="setPid(this)" id="spid" >
+				<select  name="parentId" id="spid" >
 
 				</select>
 
