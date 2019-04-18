@@ -2,6 +2,7 @@ package com.qianfeng.service.impl;
 
 import com.qianfeng.common.PageInfo;
 import com.qianfeng.dao.GradeMapper;
+import com.qianfeng.entity.Authority;
 import com.qianfeng.entity.Grade;
 import com.qianfeng.entity.Student;
 import com.qianfeng.service.GradeService;
@@ -56,6 +57,17 @@ public class GradeServiceImpl implements GradeService {
 
     @Override
     public int updateGrade(Grade grade) {
+        Grade grade1 = gradeDao.findByNameOrLocation(grade.getName(), null, grade.getFlag());
+        Grade grade2 = gradeDao.findByNameOrLocation(null, grade.getLocation(), grade.getFlag());
+        if (grade1 != null && grade1.getId() != grade.getId()) {
+            // 判断班级名称是否重复
+            throw new RuntimeException("该班级名称已存在，请重新输入");
+        }
+        if (grade2 != null && grade2.getId() != grade.getId()) {
+            // 判断班级路径是否重复
+            throw new RuntimeException("该班级地址已占用，请重新输入");
+        }
+
         return gradeDao.updateByPrimaryKeySelective(grade);
     }
 

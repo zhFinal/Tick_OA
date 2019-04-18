@@ -22,8 +22,6 @@ public interface UserService {
 
     User selectByName(String name);
 
-
-
     List<VMenu> queryMenuById(int id);
 
 
@@ -36,4 +34,6 @@ public interface UserService {
     boolean insertBatch(List<User> list);
 
     List<User> findLeader();
+
+    void addUser(User user);
 }

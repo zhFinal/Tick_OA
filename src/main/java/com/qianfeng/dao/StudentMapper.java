@@ -18,6 +18,9 @@ public interface StudentMapper {
     // 根据学生学号查询学生信息
     Student selectByPrimaryKey(String no);
 
+    // 根据学生身份证号查询学生信息
+    Student selectByCardNo(String cardno);
+
     // 选择性更新学生信息
     int updateByPrimaryKeySelective(Student record);
 

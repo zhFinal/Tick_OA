@@ -5,7 +5,7 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="aicon" jdbcType="VARCHAR" property="aicon" />
     <result column="aurl" jdbcType="VARCHAR" property="aurl" />
-    <result column="parentId" jdbcType="INTEGER" property="parentid" />
+    <result column="parentId" jdbcType="INTEGER" property="parentId" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="type" jdbcType="INTEGER" property="type" />
   </resultMap>
@@ -27,7 +27,7 @@
       parentId, title, type
       )
     values (#{id,jdbcType=INTEGER}, #{aicon,jdbcType=VARCHAR}, #{aurl,jdbcType=VARCHAR}, 
-      #{parentid,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}
+      #{parentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.qianfeng.entity.Authority">
@@ -42,7 +42,7 @@
       <if test="aurl != null">
         aurl,
       </if>
-      <if test="parentid != null">
+      <if test="parentId != null">
         parentId,
       </if>
       <if test="title != null">
@@ -62,8 +62,8 @@
       <if test="aurl != null">
         #{aurl,jdbcType=VARCHAR},
       </if>
-      <if test="parentid != null">
-        #{parentid,jdbcType=INTEGER},
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
       </if>
       <if test="title != null">
         #{title,jdbcType=VARCHAR},
@@ -82,8 +82,8 @@
       <if test="aurl != null">
         aurl = #{aurl,jdbcType=VARCHAR},
       </if>
-      <if test="parentid != null">
-        parentId = #{parentid,jdbcType=INTEGER},
+      <if test="parentId != null">
+        parentId = #{parentId,jdbcType=INTEGER},
       </if>
       <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
@@ -98,12 +98,12 @@
     update t_authority
     set aicon = #{aicon,jdbcType=VARCHAR},
       aurl = #{aurl,jdbcType=VARCHAR},
-      parentId = #{parentid,jdbcType=INTEGER},
+      parentId = #{parentId,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
       type = #{type,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~自主添加~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
  <!-- <resultMap id="menuMap" type="com.qianfeng.vo.VMenu">
     <id property="id" column="pid"/>
     <result property="menuName" column="ptitle"/>
@@ -132,8 +132,27 @@
   </select>-->
 
   <select id="queryAll" resultType="com.qianfeng.entity.Authority">
-
     select * from t_authority
   </select>
+
+  <select id="findAllAutByPage" parameterType="map" resultType="com.qianfeng.entity.Authority">
+    select * from t_authority
+    order by id ASC
+    limit #{index},#{limit}
+  </select>
+
+  <select id="findCount"  resultType="int">
+    select count(*) from t_authority
+  </select>
+
+  <select id="findByName" parameterType="string"  resultType="com.qianfeng.entity.Authority">
+    select * from t_authority where title=#{name}
+  </select>
+
+  <select id="findRootByParentId" parameterType="int" resultType="com.qianfeng.entity.Authority">
+    select * from t_authority where parentId=#{parentId}
+  </select>
+
+
 </mapper>
 

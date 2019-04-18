@@ -11,6 +11,7 @@ import com.qianfeng.utils.JsonUtils;
 import com.qianfeng.utils.PageUtil;
 import com.qianfeng.vo.VResult;
 import com.qianfeng.vo.VUser;
+import org.apache.shiro.crypto.hash.Md5Hash;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,17 +31,18 @@ public class UserController {
 
     @Autowired
     private RoleService roleService;
-    @RequestMapping("/userall.do")
-    public LayUIListJsonBean findAllUser(int page, int limit,String no){
-        PageInfo pageInfo = userService.findAllUser(page,limit,no);
 
-        return JsonUtils.createListBean(0,pageInfo);
+    @RequestMapping("/userall.do")
+    public LayUIListJsonBean findAllUser(int page, int limit, String no) {
+        PageInfo pageInfo = userService.findAllUser(page, limit, no);
+
+        return JsonUtils.createListBean(0, pageInfo);
     }
 
     @RequestMapping("/userdel.do")
-    public JsonBean deleleById(int id){
+    public JsonBean deleleById(int id) {
         userService.deleteById(id);
-        return JsonUtils.createJsonBean(1000 ,null);
+        return JsonUtils.createJsonBean(1000, null);
     }
 
     /*@RequestMapping("/find.do")
@@ -52,11 +54,11 @@ public class UserController {
 
 
     @RequestMapping("/userroleedit.do")
-    public VResult usereidt(int id,int[] rids){
-        if (roleService.updateRole(id,rids)){
+    public VResult usereidt(int id, int[] rids) {
+        if (roleService.updateRole(id, rids)) {
             return VResult.setOk("ok");
 
-        }else {
+        } else {
             return VResult.setERROR("Error");
         }
     }
@@ -66,4 +68,27 @@ public class UserController {
     public List<User> findLeader() {
         return userService.findLeader();
     }
+
+    @RequestMapping("useradd.do")
+    @ResponseBody
+    public JsonBean userAdd(User user) {
+        String passwordUnencityped = user.getPassword();
+
+        // 控制器加密password
+        Md5Hash md5Hash = new Md5Hash(passwordUnencityped,"abc",1);
+        String password = String.valueOf(md5Hash);
+        user.setPassword(password);
+
+
+        try {
+            userService.addUser(user);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("已存在该用户，无法添加");
+        }
+
+        return JsonUtils.createJsonBean(1,null);
+    }
+
+
 }

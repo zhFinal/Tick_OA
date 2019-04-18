@@ -86,11 +86,9 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public int updateStu(Student student) {
 
-        Student stu = studentDao.selectByPrimaryKey(student.getNo());
-        if (stu != null) {
-            // 判断学生学号是否重复
-            throw new RuntimeException("该学生学号已存在，请重新输入");
-        } else if (stu != null && stu.getCardno() == student.getCardno()) {
+        Student stu = studentDao.selectByCardNo(student.getCardno());
+
+        if (stu != null && stu.getNo() != student.getNo()) {
             // 判断学生身份证号码是否重复
             throw new RuntimeException("该学生身份证号码已存在，请重新输入");
         }

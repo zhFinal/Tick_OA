@@ -222,6 +222,10 @@
     select count(*) from t_student
   </select>
 
+  <select id="selectByCardNo" parameterType="string"  resultType="student">
+    select * from t_student where cardno=#{cardno}
+  </select>
+
 
   <select id="findLastStu"  resultType="student">
     select * from t_student order by no DESC limit 1

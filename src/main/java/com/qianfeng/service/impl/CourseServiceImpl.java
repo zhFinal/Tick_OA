@@ -75,7 +75,7 @@ public class CourseServiceImpl implements CourseService{
     public int updateCourse(Course course) {
         Course cour = courseDao.findByName(course.getName());
 
-        if (cour != null) {
+        if (cour != null && cour.getId() != course.getId()) {
             // 判断学科名称是否重复
             throw new RuntimeException("该学科名称已存在，请重新输入");
         }

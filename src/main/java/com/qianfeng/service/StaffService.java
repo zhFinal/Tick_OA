@@ -28,4 +28,6 @@ public interface StaffService {
 
     void deleteStaff(String no);
 
+    Staff findStaffByNo(String no);
+
 }

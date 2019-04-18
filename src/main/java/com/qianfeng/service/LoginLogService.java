@@ -14,4 +14,6 @@ public interface LoginLogService {
     List<LoginLog> queryAll();
 
     List<LoginLog> queryByNo(String no);
+
+    boolean insert(LoginLog record);
 }

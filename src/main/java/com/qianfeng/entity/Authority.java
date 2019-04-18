@@ -7,7 +7,7 @@ public class Authority {
 
     private String aurl;
 
-    private Integer parentid;
+    private Integer parentId;
 
     private String title;
 
@@ -37,12 +37,12 @@ public class Authority {
         this.aurl = aurl == null ? null : aurl.trim();
     }
 
-    public Integer getParentid() {
-        return parentid;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public String getTitle() {
