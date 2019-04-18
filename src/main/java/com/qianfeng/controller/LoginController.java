@@ -31,14 +31,15 @@ public class LoginController {
 
     @Autowired
     private UserService userService;
+
     @RequestMapping("/login.do")
     @ResponseBody
-    public JsonBean login(String name, String password,boolean rememberMe, HttpSession session){
+    public JsonBean login(String name, String password, boolean rememberMe, HttpSession session) {
 
         try {
-            User user = userService.login(name,password);
+            User user = userService.login(name, password);
 
-            session.setAttribute(CommonInfo.LOGIN_USER,user);
+            session.setAttribute(CommonInfo.LOGIN_USER, user);
 
             LoginLog log = new LoginLog();
             log.setIp("117.159.15.221");
@@ -49,7 +50,7 @@ public class LoginController {
             return JsonUtils.createJsonBean(1, null);
         } catch (Exception e) {
             e.printStackTrace();
-            return JsonUtils.createJsonBean(0,e.getMessage());
+            return JsonUtils.createJsonBean(0, e.getMessage());
         }
 
     }
@@ -80,5 +81,13 @@ public class LoginController {
         }
 
         return ipString;
+    }
+
+    @RequestMapping("/name.do")
+    @ResponseBody
+    public JsonBean logName(HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        String name = user.getName();
+        return JsonUtils.createJsonBean(1, name);
     }
 }

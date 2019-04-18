@@ -54,7 +54,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="media/images/qf_logo.png" class="layui-nav-img">
-                    admin
+                    <span id="loginName"></span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:showTab(1001,'user.html','我的信息');">我的信息</a></dd>
@@ -120,6 +120,7 @@
             element.render();
         });
         showTab(20000,"main.html","首页");
+
     });
     var tid=-1;
     function showTab(id,u,n) {
@@ -136,6 +137,18 @@
         tid=id;
     }
 
+    $(function () {
+        $.ajax({
+            type:"get",
+            url:"name.do",
+            dataType:"json",
+            success:function (data) {
+                if(data.code == 1) {
+                    $("#loginName").append(data.info);
+                }
+            }
+        })
+    })
 </script>
 </body>
 
