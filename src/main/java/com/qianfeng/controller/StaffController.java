@@ -132,7 +132,11 @@ public class StaffController {
         return JsonUtils.createJsonBean(0,null);
     }
 
-
-
+    @RequestMapping("staffSertch.do")
+    @ResponseBody
+    public JsonBean searchStaff(String no){
+        Staff staff = staffService.findStaffByNo(no);
+        return JsonUtils.createJsonBean(1,staff);
+    }
 }
 

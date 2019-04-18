@@ -73,6 +73,9 @@
         #{headphoto,jdbcType=VARCHAR},
       </if>
     </trim>
+    <selectKey keyProperty="id" order="AFTER" resultType="int">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.qianfeng.entity.User">
     update t_user
@@ -234,4 +237,6 @@
         select u.* from t_user u INNER join t_userrole ur on u.id = ur.uid
         where ur.rid &lt;= 3
     </select>
+
+
 </mapper>

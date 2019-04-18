@@ -87,4 +87,9 @@ public class StaffServiceImpl implements StaffService {
     public void deleteStaff(String no) {
         staffDao.deleteByPrimaryKey(no);
     }
+
+    @Override
+    public Staff findStaffByNo(String no) {
+        return staffDao.selectByPrimaryKey(no);
+    }
 }

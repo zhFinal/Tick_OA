@@ -43,8 +43,9 @@ public class BaseTest {
     public void HashTest(){
         // e99a18c428cb38d5f260853678922e03  ----- 123
         // 7d61f71f34b0305aabc5d1cdd9d2a777 ------ admin
-        Md5Hash md5Hash = new Md5Hash("admin" , "abc" ,1);
-        System.out.println("密码是：\n" + md5Hash );
+        Md5Hash md5Hash = new Md5Hash("123" , "abc" ,1);
+        String md5 = String.valueOf(md5Hash);
+        System.out.println("密码是：\n" + md5);
     }
 
 }

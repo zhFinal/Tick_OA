@@ -1,8 +1,12 @@
 package com.qianfeng.service.impl;
 
 import com.qianfeng.common.PageInfo;
+import com.qianfeng.dao.StaffDao;
 import com.qianfeng.dao.UserDao;
+import com.qianfeng.dao.UserRoleMapper;
+import com.qianfeng.entity.Staff;
 import com.qianfeng.entity.User;
+import com.qianfeng.entity.UserRoleKey;
 import com.qianfeng.service.UserService;
 import com.qianfeng.utils.PageUtil;
 import com.qianfeng.vo.VMenu;
@@ -19,6 +23,9 @@ import java.util.List;
 public class UserServiceImpl implements UserService{
     @Autowired
     private UserDao userDao;
+    @Autowired
+    private UserRoleMapper userRoleDao;
+
     @Override
     public User login(String name, String password) {
         // shiro中提供的认证操作方法
@@ -69,7 +76,6 @@ public class UserServiceImpl implements UserService{
     }
 
 
-
     @Override
     public boolean updateFlag(int flag, int id) {
         return userDao.updateFlag(flag,id)>0;
@@ -104,6 +110,18 @@ public class UserServiceImpl implements UserService{
     public List<User> findLeader() {
         return userDao.findLeader();
     }
+
+    @Override
+    public void addUser(User user) {
+
+        int uid = userDao.insertSelective(user);
+        UserRoleKey key = new UserRoleKey();
+        key.setUid(uid);
+        key.setRid(4);
+        userRoleDao.insert(key);
+
+    }
+
 
 
 }

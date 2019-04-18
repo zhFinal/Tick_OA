@@ -36,4 +36,6 @@ public interface UserService {
     boolean insertBatch(List<User> list);
 
     List<User> findLeader();
+
+    void addUser(User user);
 }

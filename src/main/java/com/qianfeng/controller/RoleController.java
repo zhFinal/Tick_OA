@@ -36,6 +36,5 @@ public class RoleController {
         return JsonUtils.createJsonBean(1000,null);
     }
 
-    //更改权限updatePower（）
 
 }
