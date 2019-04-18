@@ -35,4 +35,9 @@ public class LoginLogServiceImpl implements LoginLogService {
     public List<LoginLog> queryByNo(String no) {
         return logMapper.queryByNo(no);
     }
+
+    @Override
+    public boolean insert(LoginLog record) {
+        return logMapper.insert(record) > 0;
+    }
 }
