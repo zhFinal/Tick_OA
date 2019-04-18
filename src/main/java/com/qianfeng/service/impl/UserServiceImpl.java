@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void loginRememberMe(String name, String password, boolean rememberMe) {
+    public void loginRememberMe(String name, String password,boolean rememberMe) {
         // shiro中提供的认证操作方法
         UsernamePasswordToken token = new UsernamePasswordToken(name, password);
 //        if(rememberMe){

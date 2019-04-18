@@ -22,8 +22,6 @@ public interface UserService {
 
     User selectByName(String name);
 
-
-
     List<VMenu> queryMenuById(int id);
 
 
