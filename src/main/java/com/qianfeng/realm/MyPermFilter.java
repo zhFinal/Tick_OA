@@ -30,9 +30,6 @@ public class MyPermFilter extends PermissionsAuthorizationFilter{
             httpResponse.sendRedirect(((HttpServletRequest) request).getContextPath() + "/unauthorized.jsp");
         }
 
-
-
-
         return false;
     }
 }
